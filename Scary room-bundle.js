@@ -7838,6 +7838,30 @@ __publicField(TemporizadorAnimacion, "Properties", {
   tiempoSalida: Property6.float(54)
 });
 
+// js/temporalizadorSonido.js
+import { Component as Component34, Property as Property7 } from "@wonderlandengine/api";
+var TemporalizadorSonido = class extends Component34 {
+  start() {
+    this.tiempoTranscurrido = 0;
+    this.soundComponent = this.object.getComponent("audio-source");
+    this.activado = false;
+  }
+  update(dt) {
+    if (this.activado)
+      return;
+    this.tiempoTranscurrido += dt;
+    if (this.tiempoTranscurrido >= this.tiempoEntrada) {
+      this.soundComponent.play();
+      this.activado = true;
+    }
+  }
+};
+__publicField(TemporalizadorSonido, "TypeName", "temporalizadorSonido");
+/* Properties that are configurable in the editor */
+__publicField(TemporalizadorSonido, "Properties", {
+  tiempoEntrada: Property7.float(25)
+});
+
 // js/index.js
 function js_default(engine) {
   engine.registerComponent(AudioListener);
@@ -7854,6 +7878,7 @@ function js_default(engine) {
   engine.registerComponent(MovimientoLuz);
   engine.registerComponent(CustomTeletransporteEntidad2);
   engine.registerComponent(TemporizadorAnimacion);
+  engine.registerComponent(TemporalizadorSonido);
 }
 export {
   js_default as default
